@@ -46,7 +46,7 @@ document.body.style.backgroundImage = "url('https://raw.githubusercontent.com/Da
         document.body.style.zIndex = '-1'; // Set a lower z-index for the background
     
         // Play a sound (replace 'sound.mp3' with the path to your sound file)
-        let audio = new Audio('https://raw.githubusercontent.com/DaCUtePotato/main/sound.mp3');
+        let audio = new Audio('https://www.dropbox.com/scl/fi/8wjjlby2r47cjlobsf8dz/background.jpeg?rlkey=l0ogdf0p9t7hbk1be5tgduqch&dl=1');
         audio.loop = true
         audio.play();
     });
