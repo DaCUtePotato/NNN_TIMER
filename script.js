@@ -41,12 +41,12 @@ document.addEventListener('DOMContentLoaded', function () {
     // Add an event listener to the overlay container
     document.querySelector('.overlay-container').addEventListener('click', function () {
         // Change the background of the site to an image
-document.body.style.backgroundImage = "url('https://raw.githubusercontent.com/DaCUtePotato/main/background.jpeg')";
+document.body.style.backgroundImage = "url('https://www.dropbox.com/scl/fi/8wjjlby2r47cjlobsf8dz/background.jpeg?rlkey=l0ogdf0p9t7hbk1be5tgduqch&dl=1')";
         document.body.style.backgroundSize = 'cover'; // Adjust to your needs
         document.body.style.zIndex = '-1'; // Set a lower z-index for the background
     
         // Play a sound (replace 'sound.mp3' with the path to your sound file)
-        let audio = new Audio('https://www.dropbox.com/scl/fi/8wjjlby2r47cjlobsf8dz/background.jpeg?rlkey=l0ogdf0p9t7hbk1be5tgduqch&dl=1');
+        let audio = new Audio('sound.mp3');
         audio.loop = true
         audio.play();
     });
