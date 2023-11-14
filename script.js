@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Add an event listener to the overlay container
     document.querySelector('.overlay-container').addEventListener('click', function () {
         // Change the background of the site to an image
-document.body.style.backgroundImage = url('background.jpeg');
+document.body.style.backgroundImage = url('https://tse1.mm.bing.net/th?id=OIP.jlLNcevQf6gP0OtYS4Y3BgHaHu&pid=Api');
         document.body.style.backgroundSize = 'cover'; // Adjust to your needs
         document.body.style.zIndex = '-1'; // Set a lower z-index for the background
     
