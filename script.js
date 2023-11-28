@@ -15,8 +15,14 @@ document.addEventListener('DOMContentLoaded', function () {
             button.id = 'goNutsButton';
             button.innerText = 'Go Nuts';
             button.href = 'incognito.html';
-            button.target = '_blank'; // Open the link in a new tab
             button.style.textDecoration = 'none'; // Remove default link underline
+            button.addEventListener('click', function (event) {
+                // Open the link in a new tab using window.open
+                window.open('incognito.html', '_blank');
+                // Prevent the default behavior of the link
+                event.preventDefault();
+            });
+
             const container = document.createElement('div');
             container.className = 'button-container';
             container.appendChild(button);
@@ -74,7 +80,8 @@ document.addEventListener('DOMContentLoaded', function () {
         let hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         let minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
         let seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+        let milliseconds = timeDifference % 1000;
 
-        document.getElementById('countdown').innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        document.getElementById('countdown').innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s ${milliseconds}ms`;
     });
 });
