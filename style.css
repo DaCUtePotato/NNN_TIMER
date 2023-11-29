@@ -16,6 +16,7 @@ body {
     box-shadow: 0 0 10px #AAE5A4;
     overflow: hidden;
     animation: fadeIn 0.5s ease-in-out;
+    cursor: pointer;
 }
 
 .countdown-container {
@@ -40,11 +41,12 @@ body {
 
 #goNutsButton {
     padding: 10px;
-    background-color: #AAE5A4;
-    color: #000000;
+    background-color: #333333;
+    color: #AAE5A4;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    box-shadow: 0 0 10px #AAE5A4; /* Added box shadow */
 }
 
 @keyframes fadeIn {
