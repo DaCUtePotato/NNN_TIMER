@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Link Options</title>
+    <title>Fancy Links</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -12,7 +12,7 @@
             justify-content: center;
             height: 100vh;
             margin: 0;
-            background-color: #f2f2f2;
+            background: linear-gradient(to right, #3498db, #2c3e50); /* Updated background color */
         }
 
         #links-container {
@@ -21,29 +21,48 @@
 
         .link {
             display: block;
-            margin-bottom: 10px;
-            font-size: 16px;
-            color: #333;
+            margin: 10px auto;
+            font-size: 18px;
+            color: #2c3e50; /* Dark blue color */
             text-decoration: none;
-            padding: 8px 16px;
-            background-color: #fff;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            transition: background-color 0.3s ease-in-out;
+            padding: 12px 24px;
+            background-color: #3498db; /* Blue background color */
+            border: 2px solid #2980b9; /* Slightly darker blue border */
+            border-radius: 8px;
+            transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
         }
 
         .link:hover {
-            background-color: #f0f0f0;
+            background-color: #2980b9; /* Darker blue on hover */
+            color: #fff; /* White text on hover */
         }
     </style>
 </head>
 <body>
     <div id="links-container">
-        <a href="https://pornhub.com" class="link">PornHub</a>
-        <a href="https://xvideos.com" class="link">xvideos</a>
-        <a href="https://hdporncomics.com" class="link">Comics</a>
-        <a href="https://multporn.net" class="link">More Comics</a>
-        <a href="https://hentaihaven.com" class="link">Hentai</a>
+        <a href="https://example.com/link1" class="link" target="_blank" onclick="playSound('sounds/link.mp3')">Link 1</a>
+        <a href="https://example.com/link2" class="link" target="_blank" onclick="playSound('sounds/link.mp3')">Link 2</a>
+        <a href="https://example.com/link3" class="link" target="_blank" onclick="playSound('sounds/link.mp3')">Link 3</a>
+        <a href="https://example.com/link4" class="link" target="_blank" onclick="playSound('sounds/link.mp3')">Link 4</a>
+        <a href="https://example.com/link5" class="link" target="_blank" onclick="playSound('sounds/link.mp3')">Link 5</a>
+        <a href="https://example.com/link6" class="link" target="_blank" onclick="playSound('sounds/link.mp3')">Link 6</a>
+        <a href="https://example.com/link7" class="link" target="_blank" onclick="playSound('sounds/link.mp3')">Link 7</a>
+        <a href="https://example.com/link8" class="link" target="_blank" onclick="playSound('sounds/link.mp3')">Link 8</a>
+        <a href="https://example.com/link9" class="link" target="_blank" onclick="playSound('sounds/link.mp3')">Link 9</a>
+        <a href="https://example.com/link10" class="link" target="_blank" onclick="playSound('sounds/link.mp3')">Link 10</a>
+        <audio id="clickSound" src="" style="display: none"></audio>
+        <script>
+            function playSound(soundPath) {
+                // Get the audio element
+                var audio = document.getElementById('clickSound');
+
+                // Set the source of the audio element
+                audio.src = soundPath;
+
+                // Play the sound
+                audio.play();
+            }
+        </script>
     </div>
 </body>
 </html>
