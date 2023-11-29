@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Define currentDate before using it in the if condition
     let currentDate = new Date();
-    if (currentDate.getMonth() === 10 && currentDate.getDate() === 29) {
+    if (currentDate.getMonth() === 11 && currentDate.getDate() === 1) {
         addGoNutsButton(); // Call the function to add the Go Nuts button
     }
 
