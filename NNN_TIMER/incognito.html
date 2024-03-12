@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fancy Links</title>
+    <style>
+    body {
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    background: linear-gradient(45deg, #3498db, #2ecc71, #16a085, #f4d03f);
+    background-size: 400% 400%;
+    animation: gradientAnimation 15s infinite linear;
+}
+
+@keyframes gradientAnimation {
+    0%, 100% {
+        background-position: 0% 0%;
+    }
+    25% {
+        background-position: 100% 0%;
+    }
+    50% {
+        background-position: 100% 100%;
+    }
+    75% {
+        background-position: 0% 100%;
+    }
+    100% {
+        background-position: 0% 0%;
+    }
+}
+
+#links-container {
+    text-align: center;
+}
+
+.link {
+    display: block;
+    margin: 10px auto;
+    font-size: 18px;
+    color: #2c3e50;
+    text-decoration: none;
+    padding: 12px 24px;
+    background-color: #3498db;
+    border: 2px solid #2980b9;
+    border-radius: 8px;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.link:hover {
+    background-color: #2980b9;
+    color: #fff;
+}
+
+
+
+    </style>
+</head>
+
+<body>
+    <div id="links-container">
+        <a href="https://pornhub.com" class="link" target="_blank" onclick="playSound('sounds/link.mp3')">PornHub</a>
+        <a href="https://xvideos.com" class="link" target="_blank" onclick="playSound('sounds/link.mp3')">xvideos</a>
+        <a href="https://nhentai.com" class="link" target="_blank" onclick="playSound('sounds/link.mp3')">Comics</a>
+        <a href="https://hdporncomics.com" class="link" target="_blank" onclick="playSound('sounds/link.mp3')">More
+            Comics</a>
+        <a href="https:hentaihaven.com" class="link" target="_blank" onclick="playSound('sounds/link.mp3')">Hentai</a>
+        <a href="https://rule34.xxx" class="link" target="_blank" onclick="playSound('sounds/link.mp3')">R34</a>
+        <a href="https://www.reddit.com/r/Hollow_Knight_R34/" class="link" target="_blank"
+            onclick="playSound('sounds/link.mp3')">HK r34</a>
+        <a href="https://www.reddit.com/r/Zeldass/" class="link" target="_blank"
+            onclick="playSound('sounds/link.mp3')">Zelda r34</a>
+        <a href="https://www.reddit.com/r/ZeldaPorn/" class="link" target="_blank"
+            onclick="playSound('sounds/link.mp3')">Zelda r34 2.0</a>
+        <a href="https://www.reddit.com/r/MinecraftRule34/" class="link" target="_blank"
+            onclick="playSound('sounds/link.mp3')">MC????</a>
+        <audio id="clickSound" src="" style="display: none"></audio>
+        <script>
+            function playSound(soundPath) {
+                // Get the audio element
+                var audio = document.getElementById('clickSound');
+
+                // Set the source of the audio element
+                audio.src = soundPath;
+
+                // Play the sound
+                audio.play();
+            }
+        </script>
+    </div>
+</body>
+
+</html>
