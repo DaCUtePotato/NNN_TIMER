@@ -19,9 +19,8 @@ document.addEventListener('DOMContentLoaded', function () {
             playTransitionSound();
             changeBackground(0.2);
 
-            if (isCountdownClicked) {
-                // Add any additional logic here
-            }
+            // Fetch a new picture from the Waifu API
+            fetchNewWaifu();
         }, countdown);
     }
 
@@ -47,6 +46,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 // play transition sound
                 playTransitionSound();
                 changeBackground(0.2);
+
+                // Fetch a new picture from the Waifu API
+                fetchNewWaifu();
             }, countdown);
 
             // Start the countdown immediately after the click
@@ -58,18 +60,76 @@ document.addEventListener('DOMContentLoaded', function () {
     };
 
     function changeBackground() {
-        // Generate a random number from 1 to 7 for the image path
-        let randomImageNumber = Math.floor(Math.random() * 7) + 1;
+        const apiUrl = 'https://api.waifu.pics/sfw/waifu'; // Fetch images with a minimum width of 1920 pixels
+        
+        const params = {
+            height: '=1920',
+            width: '=1080'
+          };
 
-        // Construct the image path
-        let imagePath = `img/Hintergrund${randomImageNumber}.jpg`;
-
-        // Set the body background image
-        document.body.style.backgroundImage = `url('${imagePath}')`;
-
-        // Log the image path for debugging
-        console.log('Changed background to:', imagePath);
+        fetch(apiUrl)
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Failed to fetch image from Waifu API');
+                }
+            })
+            .then(data => {
+                // Extract the image URL from the API response
+                const imageUrl = data.url;
+    
+                // Set the body background image
+                document.body.style.backgroundImage = `url('${imageUrl}')`;
+                document.body.style.backgroundSize = 'cover'; // Adjusted to cover the screen
+    
+                // Log the image URL for debugging
+                console.log('Changed background to:', imageUrl);
+            })
+            .catch(error => {
+                console.error('An error occurred while fetching image:', error);
+            });
     }
+
+    function fetchNewWaifu() {
+        const apiUrl = 'https://api.waifu.im/search'; // API endpoint URL for searching waifus
+        const params = {
+            height: '=2000', // Minimum height of 2000 pixels for widescreen format
+            width: '=4000'
+        };
+    
+        const queryParams = new URLSearchParams();
+    
+        for (const key in params) {
+            if (Array.isArray(params[key])) {
+                params[key].forEach(value => {
+                    queryParams.append(key, value);
+                });
+            } else {
+                queryParams.set(key, params[key]);
+            }
+        }
+    
+        const requestUrl = `${apiUrl}?${queryParams.toString()}`;
+    
+        fetch(requestUrl)
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Request failed with status code: ' + response.status);
+                }
+            })
+            .then(data => {
+                // Process the response data as needed
+                console.log(data);
+                // For this example, we're just logging the data
+            })
+            .catch(error => {
+                console.error('An error occurred:', error.message);
+            });
+    }
+    
 
     function playTransitionSound(volume=0.2) {
         // Create an Audio element
