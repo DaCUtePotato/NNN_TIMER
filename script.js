@@ -1,12 +1,19 @@
 document.addEventListener('DOMContentLoaded', function () {
-    let targetDate = new Date();
-    targetDate.setMonth(11); // Set the target month to December
-    targetDate.setDate(1);   // Set the target day to the 1st
-    targetDate.setHours(0, 0, 0, 0);
+    let now = new Date();
+    let targetDate;
 
-    let isBackgroundOn = false; // Initial state: background is off
-    let backgroundChangeInterval; // Variable to store the interval ID
-    let countdown = 2000; // Initial countdown value
+    if (now.getUTCMonth() === 10) { // Check UTC month for November
+        targetDate = new Date(Date.UTC(now.getUTCFullYear(), 10, 30)); // Set target to November 30 UTC
+    } else {
+        targetDate = new Date(Date.UTC(now.getUTCFullYear(), 10, 1)); // Set target to November 1 UTC
+    }
+
+    targetDate.setUTCHours(0, 0, 0, 0); // Reset time to midnight in UTC
+
+
+    let isBackgroundOn = false;
+    let backgroundChangeInterval;
+    let countdown = 2000;
     let isCountdownClicked = false;
 
     function startBackgroundChangeInterval() {
@@ -60,13 +67,14 @@ document.addEventListener('DOMContentLoaded', function () {
     };
 
     function changeBackground() {
-        const apiUrl = 'https://api.waifu.pics/sfw/waifu'; // Fetch images with a minimum width of 1920 pixels
+        const apiUrl = 'https://api.waifu.im/search'; // Correct Waifu API URL
         
         const params = {
-            height: '=1920',
-            width: '=1080'
-          };
+            height: '<=2000',
+            width: '>=3000'
+        };
 
+        // Fetch images from the Waifu API
         fetch(apiUrl)
             .then(response => {
                 if (response.ok) {
@@ -76,15 +84,17 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             })
             .then(data => {
-                // Extract the image URL from the API response
-                const imageUrl = data.url;
+                if (data.images && data.images.length > 0) {
+                    // Extract the first image URL from the API response
+                    const imageUrl = data.images[0].url;
     
-                // Set the body background image
-                document.body.style.backgroundImage = `url('${imageUrl}')`;
-                document.body.style.backgroundSize = 'cover'; // Adjusted to cover the screen
+                    // Set the body background image
+                    document.body.style.backgroundImage = `url('${imageUrl}')`;
+                    document.body.style.backgroundSize = 'cover'; // Adjusted to cover the screen
     
-                // Log the image URL for debugging
-                console.log('Changed background to:', imageUrl);
+                    // Log the image URL for debugging
+                    console.log('Changed background to:', imageUrl);
+                }
             })
             .catch(error => {
                 console.error('An error occurred while fetching image:', error);
@@ -101,13 +111,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const queryParams = new URLSearchParams();
     
         for (const key in params) {
-            if (Array.isArray(params[key])) {
-                params[key].forEach(value => {
-                    queryParams.append(key, value);
-                });
-            } else {
-                queryParams.set(key, params[key]);
-            }
+            queryParams.set(key, params[key]);
         }
     
         const requestUrl = `${apiUrl}?${queryParams.toString()}`;
@@ -121,9 +125,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             })
             .then(data => {
-                // Process the response data as needed
                 console.log(data);
-                // For this example, we're just logging the data
             })
             .catch(error => {
                 console.error('An error occurred:', error.message);
@@ -141,25 +143,28 @@ document.addEventListener('DOMContentLoaded', function () {
         audio.play();
     }
 
-    function updateCountdown() {
+function updateCountdown() {
         let now = new Date();
-        let timeDifference = Math.abs(targetDate - now);
+        let timeDifference = targetDate - now;
+        if (timeDifference < 0) {
+            // If we've passed the target date, stop updating
+            document.getElementById('countdown').innerHTML = "Time's up!";
+            return;
+        }
+
         let days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
         let hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         let minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
         let seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
         let milliseconds = timeDifference % 1000;
 
-        // Format milliseconds to always have three digits
         milliseconds = milliseconds.toString().padStart(3, '0');
 
         document.getElementById('countdown').innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s ${milliseconds}ms`;
 
-        // Request the next animation frame
         requestAnimationFrame(updateCountdown);
     }
 
-    // Initial call to start the animation
     requestAnimationFrame(updateCountdown);
 
     // Define currentDate before using it in the if condition
